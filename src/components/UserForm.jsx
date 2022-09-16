@@ -1,18 +1,36 @@
 import axios from 'axios';
 import React from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-const UserForm = ({getUsers}) => {
-    const { register, handleSubmit } = useForm();
+const UserForm = ({getUsers, userSelect, updateUser}) => {
 
+    const { register, handleSubmit, reset } = useForm();
+
+    useEffect(() =>{
+            reset(userSelect)
+    }, [userSelect])
 
 
     const submit = data =>{
-        axios.post(`https://users-crud1.herokuapp.com/users/`, data)
-                .then(() => getUsers())
-            .catch(error => console.log(error.response))
+        if (userSelect) {
+            updateUser(data)
+        }else{
+            axios.post(`https://users-crud1.herokuapp.com/users/`, data)
+                    .then(() => getUsers())
+                .catch(error => console.log(error.response))
+        }
     }
-
+    
+    const clearForm = () =>{
+        reset({
+            first_name: "",
+            last_name: "",
+            email: "",
+            password: "",
+            birthday: ""
+        })
+    }
     
     return (
         <div className='form-container'>
@@ -28,7 +46,7 @@ const UserForm = ({getUsers}) => {
                 </div>
                 <div>
                     <label htmlFor="email">email</label>
-                    <input type="email" id='email' {...register("email")}  />
+                    <input type="text" id='email' {...register("email")}  />
                 </div>
                 <div>
                     <label htmlFor="password">Password</label>
@@ -39,6 +57,7 @@ const UserForm = ({getUsers}) => {
                     <input type="date" id='birthday' {...register("birthday")}  />
                 </div>
                 <button> submit</button>
+                <button type='button' onClick={() => clearForm()}> clear</button>
             </form>
         </div>
     );

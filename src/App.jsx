@@ -17,12 +17,25 @@ function App() {
     const getUsers = () =>{
       axios.get(`https://users-crud1.herokuapp.com/users/`)
         .then(res => setUsers(res.data))
-    }    
-    
+    }
 
+
+    /// aca funcion me seleciona el usuario actual
+  const userSelection = (user) =>{
+        setUSerSelect(user)
+        console.log(user)
+  }
+// esta funcion me elimina el usuario
   const deleteUSer = (id) =>{
       axios.delete(`https://users-crud1.herokuapp.com/users/${id}/`)
         .then(() => getUsers())
+  }
+
+  
+  const updateUser = (user) =>{
+      user.id = userSelect.id
+      axios.put(`https://users-crud1.herokuapp.com/users/${user.id}/`, user)
+        .then(() => getUsers() )
   }
 
 
@@ -32,9 +45,13 @@ function App() {
   return (
     <div className="App">
     <h1>hola</h1>
-    <UserForm getUsers={getUsers} />
+    <UserForm getUsers={getUsers}
+    userSelect={userSelect}
+    updateUser={updateUser}
+    />
     <UserList  users={users}
     deleteUSer={deleteUSer}
+    userSelection={userSelection}
     /> 
     </div>
   )

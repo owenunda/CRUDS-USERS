@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserList = ({users, deleteUSer}) => {
+const UserList = ({users, deleteUSer, userSelection}) => {
 
     return (
         <div>
@@ -13,6 +13,7 @@ const UserList = ({users, deleteUSer}) => {
                             <p> {user.email} </p>
                             <p> {user.birthday} </p>
                             <button onClick={() => deleteUSer(user.id)}>Delete</button>
+                            <button onClick={() => userSelection(user)} >Editar</button>
                         </li>
                     ))
                 }
