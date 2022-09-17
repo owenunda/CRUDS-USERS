@@ -13,7 +13,16 @@ function App() {
   const MySwal = withReactContent(Swal)
 
 
+const errorAlert = () =>{
+  MySwal.fire({
+    icon: "error",
+    title: <p>ERROR</p>,
+    html: <p>There was an error, please try again</p>,
+    width: "400px",
+    timer: 2000
+    })
 
+}
 
 
 
@@ -24,16 +33,6 @@ function App() {
   // me muestra a los usuarios en cada render que haga
   useEffect(() =>{
     getUsers()
-
-
-    /*
-    MySwal.fire({
-       title: "hola",
-       html: <b>hola</b>
-     })
-     
-    */
-
   }, [])
 
   // me trae a los usuarios de la api
@@ -49,9 +48,18 @@ function App() {
         CreateUSer()
   }
 // esta funcion me elimina el usuario
-  const deleteUSer = (id) =>{
-      axios.delete(`https://users-crud1.herokuapp.com/users/${id}/`)
-        .then(() => getUsers())
+  const deleteUSer = (user) =>{
+      axios.delete(`https://users-crud1.herokuapp.com/users/${user.id}/`)
+        .then(() => {
+          getUsers()
+    MySwal.fire({
+      icon: "success",
+      title: <p>User Deleted</p>,
+      html: <p> User {user.first_name} {user.last_name} has been <b>successfully</b> removed</p>,
+      width: "400px",
+      timer: 2000
+    })
+        })
   }
 
 
@@ -59,7 +67,16 @@ function App() {
   const updateUser = (user) =>{
       user.id = userSelect.id
       axios.put(`https://users-crud1.herokuapp.com/users/${user.id}/`, user)
-        .then(() => getUsers() )
+        .then(() => {
+          getUsers()
+        MySwal.fire({
+          icon: "success",
+        title: <p>updated user</p>,
+        html: <p> User {user.first_name} {user.last_name} has been <b>successfully</b> updated</p>,
+        width: "400px",
+        timer: 2000
+        })
+        } )
   }
 
 
@@ -80,6 +97,7 @@ const CreateUSer = () =>{
     updateUser={updateUser}
     isCreateUser={isCreateUser}
     CreateUSer={CreateUSer}
+    errorAlert={errorAlert}
     />
     <UserList  users={users}
     deleteUSer={deleteUSer}

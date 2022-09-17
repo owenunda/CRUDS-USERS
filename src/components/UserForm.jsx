@@ -3,7 +3,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-const UserForm = ({getUsers, userSelect, updateUser, isCreateUser, CreateUSer, setUSerSelect}) => {
+const UserForm = ({getUsers, userSelect, updateUser, isCreateUser, CreateUSer, setUSerSelect, errorAlert}) => {
 
     const { register, handleSubmit, reset } = useForm();
 
@@ -18,7 +18,10 @@ const UserForm = ({getUsers, userSelect, updateUser, isCreateUser, CreateUSer, s
         }else{
             axios.post(`https://users-crud1.herokuapp.com/users/`, data)
                     .then(() => getUsers())
-                .catch(error => console.log(error.response))
+                    .catch((error) =>{
+                        console.log(error);
+                        errorAlert()
+                    })
         }
         clearForm()
         CreateUSer()
@@ -49,23 +52,23 @@ const UserForm = ({getUsers, userSelect, updateUser, isCreateUser, CreateUSer, s
                 </div>
             <form className='formUser' onSubmit={handleSubmit(submit)} >
                 <div className='div-input'>
-                    <label htmlFor="first_name">Name</label>
+                    <label htmlFor="first_name"><i className="fa-regular fa-user"></i> Name</label>
                     <input type="text" id='first_name' {...register("first_name")} />
                 </div>
                 <div className='div-input'>
-                    <label htmlFor="last_name">last name</label>
+                    <label htmlFor="last_name"><i className="fa-regular fa-user"></i> last name</label>
                     <input type="text" id='last_name'  {...register("last_name")}  />
                 </div>
                 <div className='div-input'>
-                    <label htmlFor="email">email</label>
+                    <label htmlFor="email"><i className="fa-solid fa-envelope"></i> email</label>
                     <input type="text" id='email' {...register("email")}  />
                 </div>
                 <div className='div-input'>
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password"><i className="fa-solid fa-lock"></i> Password</label>
                     <input type="password" id='password' {...register("password")}  />
                 </div>
                 <div className='div-input'>
-                    <label htmlFor="birthday">birthday</label>
+                    <label htmlFor="birthday"><i className="fa-solid fa-cake-candles"></i> birthday</label>
                     <input type="date" id='birthday' {...register("birthday")}  />
                 </div>
                 <div className='btns'>

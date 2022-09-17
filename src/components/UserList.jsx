@@ -13,7 +13,7 @@ const UserList = ({users, deleteUSer, userSelection}) => {
                             <p> <span>EMAIL</span><br /> {user.email} </p>
                             <p> <span>BIRTHDAY</span><br /> <i className="fa-solid fa-cake-candles"></i> {user.birthday} </p>
                             <div className='btn-user'>
-                            <button onClick={() => deleteUSer(user.id)}><i className="fa-solid fa-trash"></i></button>
+                            <button onClick={() => deleteUSer(user)}><i className="fa-solid fa-trash"></i></button>
                             <button onClick={() => userSelection(user)}><i className="fa-solid fa-user-pen"></i></button>
                             </div>
                         </li>
