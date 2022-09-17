@@ -114,6 +114,7 @@ li{
 .users-container ul{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 }
 .list-user{
   border: 1px solid #E5E5E5;
