@@ -34,13 +34,18 @@ const UserForm = ({getUsers, userSelect, updateUser, isCreateUser, CreateUSer, s
         })
         setUSerSelect(null)
     }
+
+    const closeForm = () =>{
+        CreateUSer()
+        clearForm()
+    }
     
     return (
         <div  className='form-container' style={{top: isCreateUser ? "0" : "-100%" }} >
             <div  className='cardForm'>
                 <div className='cardForm-nav'>
                     <h1> {userSelect ? "Edit user" : "New user"} </h1>
-                    <button onClick={() => CreateUSer()}><i className="fa-solid fa-xmark"></i></button>
+                    <button  onClick={() => closeForm()}><i className="fa-solid fa-xmark"></i></button>
                 </div>
             <form className='formUser' onSubmit={handleSubmit(submit)} >
                 <div className='div-input'>

@@ -24,7 +24,7 @@ function App() {
     /// aca funcion me seleciona el usuario actual
   const userSelection = (user) =>{
         setUSerSelect(user)
-        console.log(user)
+        CreateUSer()
   }
 // esta funcion me elimina el usuario
   const deleteUSer = (id) =>{
@@ -49,8 +49,8 @@ const CreateUSer = () =>{
   return (
     <div className="App">
       <div className='nav'>
-        <h1>Users</h1>
-        <button onClick={() => CreateUSer()}>+ Create new user</button>
+        <h1> <i className="fa-solid fa-users"></i> Users</h1>
+        <button className='btn btn-create' onClick={() => CreateUSer()}>+ Create new user</button>
       </div>
     <UserForm getUsers={getUsers}
     userSelect={userSelect}

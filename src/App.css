@@ -13,15 +13,27 @@ body{
   height: 100vh;
 }
 .App{
+  margin: auto;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
+  max-width: 1500px;
+  padding: 3rem;
 }
 li{
   list-style: none;
+}
+.nav{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.nav h1{
+  font-size: 3rem;
 }
 .btn{
   background-color: #555A88;
@@ -79,9 +91,67 @@ li{
   display: flex;
   justify-content: space-evenly;
 }
+.btn-create{
+  padding: .6rem;
+  color: white;
+  width: 150px;
+  height: 40px;
+}
 .btn-submit{
   width: 100%;
   height: 35px;
   color: white;
   box-shadow: 0px 11px 15px -3px rgba(0,0,0,0.5);
+}
+.users-container{
+  width: 100%;
+}
+.users-container ul{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.list-user{
+  border: 1px solid #E5E5E5;
+  padding: 1rem;
+  width: 330px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+hr{
+  color: #E5E5E5;
+}
+.list-user h3{
+  font-size: 1.5rem;
+}
+.list-user p span{
+  font-size: 0.8rem;
+    font-weight: 300;
+}
+.btn-user{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: .8rem;
+}
+.btn-user button{
+  width: 35px;
+  height: 35px;
+}
+.btn-user button:nth-child(1){
+  background-color: #D85D5D;
+  color: white;
+  border: 1px solid #D93F3F;
+}
+.btn-user button:nth-child(2){
+  background-color: #F6F6F6;
+  border: 1px solid #BDBDBD;
+  color: #BDBDBD;
+}
+@media screen and (max-width: 700px) {
+  .users-container ul{
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+  }
 }
