@@ -8,6 +8,7 @@ import UserList from './components/UserList'
 function App() {
   const [users, setUsers] = useState([])
   const [userSelect, setUSerSelect] = useState(null)
+  const [isCreateUser, setIscreateUser] = useState(false)
   // me muestra a los usuarios en cada render que haga
   useEffect(() =>{
     getUsers()
@@ -31,7 +32,8 @@ function App() {
         .then(() => getUsers())
   }
 
-  
+
+// esta funcion me actualiza los usuarios
   const updateUser = (user) =>{
       user.id = userSelect.id
       axios.put(`https://users-crud1.herokuapp.com/users/${user.id}/`, user)
@@ -39,15 +41,23 @@ function App() {
   }
 
 
-
+const CreateUSer = () =>{
+  setIscreateUser(!isCreateUser)
+}
 
 
   return (
     <div className="App">
-    <h1>hola</h1>
+      <div className='nav'>
+        <h1>Users</h1>
+        <button onClick={() => CreateUSer()}>+ Create new user</button>
+      </div>
     <UserForm getUsers={getUsers}
     userSelect={userSelect}
+    setUSerSelect={setUSerSelect}
     updateUser={updateUser}
+    isCreateUser={isCreateUser}
+    CreateUSer={CreateUSer}
     />
     <UserList  users={users}
     deleteUSer={deleteUSer}

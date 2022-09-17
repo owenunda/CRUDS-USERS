@@ -3,7 +3,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-const UserForm = ({getUsers, userSelect, updateUser}) => {
+const UserForm = ({getUsers, userSelect, updateUser, isCreateUser, CreateUSer, setUSerSelect}) => {
 
     const { register, handleSubmit, reset } = useForm();
 
@@ -20,6 +20,8 @@ const UserForm = ({getUsers, userSelect, updateUser}) => {
                     .then(() => getUsers())
                 .catch(error => console.log(error.response))
         }
+        clearForm()
+        CreateUSer()
     }
     
     const clearForm = () =>{
@@ -30,35 +32,42 @@ const UserForm = ({getUsers, userSelect, updateUser}) => {
             password: "",
             birthday: ""
         })
+        setUSerSelect(null)
     }
     
     return (
-        <div className='form-container'>
-            <h1> Nuevo Usuario </h1>
-            <form onSubmit={handleSubmit(submit)} >
-                <div>
+        <div  className='form-container' style={{top: isCreateUser ? "0" : "-100%" }} >
+            <div  className='cardForm'>
+                <div className='cardForm-nav'>
+                    <h1> {userSelect ? "Edit user" : "New user"} </h1>
+                    <button onClick={() => CreateUSer()}><i className="fa-solid fa-xmark"></i></button>
+                </div>
+            <form className='formUser' onSubmit={handleSubmit(submit)} >
+                <div className='div-input'>
                     <label htmlFor="first_name">Name</label>
                     <input type="text" id='first_name' {...register("first_name")} />
                 </div>
-                <div>
+                <div className='div-input'>
                     <label htmlFor="last_name">last name</label>
                     <input type="text" id='last_name'  {...register("last_name")}  />
                 </div>
-                <div>
+                <div className='div-input'>
                     <label htmlFor="email">email</label>
                     <input type="text" id='email' {...register("email")}  />
                 </div>
-                <div>
+                <div className='div-input'>
                     <label htmlFor="password">Password</label>
                     <input type="password" id='password' {...register("password")}  />
                 </div>
-                <div>
+                <div className='div-input'>
                     <label htmlFor="birthday">birthday</label>
                     <input type="date" id='birthday' {...register("birthday")}  />
                 </div>
-                <button> submit</button>
-                <button type='button' onClick={() => clearForm()}> clear</button>
+                <div className='btns'>
+                <button className='btn btn-submit' >{userSelect ? "save Changes" : "add new user"}</button>
+                </div>
             </form>
+            </div>
         </div>
     );
 };
