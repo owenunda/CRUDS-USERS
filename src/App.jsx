@@ -4,14 +4,36 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import UserForm from './components/UserForm'
 import UserList from './components/UserList'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import 'animate.css';
 
 function App() {
+  
+  const MySwal = withReactContent(Swal)
+
+
+
+
+
+
   const [users, setUsers] = useState([])
   const [userSelect, setUSerSelect] = useState(null)
   const [isCreateUser, setIscreateUser] = useState(false)
+
   // me muestra a los usuarios en cada render que haga
   useEffect(() =>{
     getUsers()
+
+
+    /*
+    MySwal.fire({
+       title: "hola",
+       html: <b>hola</b>
+     })
+     
+    */
+
   }, [])
 
   // me trae a los usuarios de la api
